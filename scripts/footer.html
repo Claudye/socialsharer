@@ -1,0 +1,56 @@
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v15.0" nonce="wr4t997C"></script>
+
+<script>
+    (function () {
+        const sharersButtons = document.querySelectorAll('[data-clsharer-type]')
+        shareAll()
+    })();
+
+    function shareAll() {
+        const allButtonsSharer = document.querySelectorAll('[data-clsharer-type=all]')
+        allButtonsSharer.forEach((shareButton, i)=>{
+            if (navigator.canShare) {
+                //Sharer document
+                if (shareButton) {
+                    let shareData = getSharerData(shareButton)
+                    // Share must be triggered by "user activation"
+                    shareButton.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        try {
+                            if (shareData) {
+                                await navigator.share(shareData);
+                            }
+                        } catch (err) {
+                            console.log(`Error: ${err}`);
+                        }
+                    });
+                }
+            }
+        })
+    }
+
+    function getSharerData(shareButton){
+        let url = shareButton.dataset.clsharerUrl ?? window.location.href
+        let text = shareButton.dataset.clsharerText ?? getSocialSharerMeta('description')
+        let title = shareButton.dataset.clsharerTitle ?? getSocialSharerMeta('title')
+        return {
+            text:text,
+            url:url,
+            title:title
+        };
+    }
+
+    function getSocialSharerMeta(name){
+        let ogName = `meta[name=og:${name}]`
+        let natifName =  `meta[name=${name}]`
+        let mDTag = document.querySelector(ogName)
+        if (!mDTag){
+            mDTag = document.querySelector(natifName)
+        }
+        if (name=='title') mDTag = document.querySelector(name)
+        if(!mDTag)  return ''
+        return mDTag.content
+    }
+
+</script>

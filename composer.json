@@ -1,0 +1,23 @@
+{
+    "name": "claudye/socialsharer",
+    "description": "PHP package for generating social share links.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Claudye\\Socialsharer\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.3 || 8.2"
+    },
+    "authors": [
+        {
+            "name": "Claude Fassinou",
+            "email": "dev.claudy@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
