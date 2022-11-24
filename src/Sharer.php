@@ -117,7 +117,7 @@ class Sharer
     }
 
     public static function scripts(){
-       if (is_file($file =__DIR__.'/../html/footer.html')) {
+       if (is_file($file =__DIR__.'/../html/scripts.html')) {
             return file_get_contents($file);
        }
        throw new Exception("The file $file does not exists", 1);
