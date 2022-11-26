@@ -20,9 +20,8 @@ class Whatsapp extends AbstractSocialsharer
      */
     public function share()
     {
-        $this->setData();
         $message = sprintf("%s \n %s \n %s", $this->data['title'], $this->data['text'], $this->data['url']);
-        $this->addAttribute('href', sprintf('whatsapp://send?text=%s', $message))
+        $this->addAttribute('href', sprintf('whatsapp://send?text=%s', trim($message)))
             ->addAttribute('target', '_blank');
         $attributes_text = implode(' ', $this->attributes);
 

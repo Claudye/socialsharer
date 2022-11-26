@@ -3,6 +3,7 @@
 namespace Claudye\Socialsharer;
 
 use Claudye\Socialsharer\TagAttribute;
+
 /**
  * Base social sharer class
  *
@@ -19,14 +20,14 @@ abstract class AbstractSocialsharer
      *
      * @var string
      */
-    protected $url = '#' ;
+    protected $url = '#';
 
     /**
      * Base data for sharing
      *
      * @var array
      */
-    protected $data = ['title'=>'','text'=>'', 'url'=>'#'] ;
+    protected $data = ['title' =>null, 'text' => null, 'url' => null];
     /**
      * Html tag
      *
@@ -116,7 +117,8 @@ abstract class AbstractSocialsharer
      *
      * @return string
      */
-    public function display(){
+    public function display()
+    {
         return $this->share();
     }
 
@@ -128,8 +130,8 @@ abstract class AbstractSocialsharer
      */
     public function url(string $url)
     {
-        $this->url = $url ;
-        $this->data['url'] = $url ;
+        $this->url = $url;
+        $this->data['url'] = $url;
         return $this;
     }
 
@@ -139,30 +141,33 @@ abstract class AbstractSocialsharer
      * @param string $porperty
      * @return \Claudye\Socialsharer\Meta|false
      */
-    public function getMeta(string $porperty){
-        $metabuilder = Sharer::getMetaBuilder() ;
+    public function getMeta(string $porperty)
+    {
+        $metabuilder = Sharer::getMetaBuilder();
 
         if ($metabuilder) {
             return $metabuilder->getMeta($porperty);
         }
 
-        return false ;
+        return false;
     }
 
-    protected function setData(){
-        $title_meta = $this->getMeta('og:title');
-        if ($title_meta) {
-            $this->data['title'] = $title_meta->get('og:title');
+    protected function setData()
+    {
+        if (!$this->data['title']) {
+            $this->data['title'] = $this->getMeta('og:title')
+                ? $this->getMeta('og:title')->get('og:title') : null;
         }
+        if (!$this->data['text']) {
 
-        $description_meta = $this->getMeta('og:description');
-        if ($title_meta) {
-            $this->data['text'] = $description_meta->get('og:description');
+            $this->data['text'] = $this->getMeta('og:description')
+                ? $this->getMeta('og:description')->get('og:description')
+                : null;
         }
-
-        $url_meta = $this->getMeta('og:url');
-        if ($url_meta) {
-            $this->data['url'] = $url_meta->get('og:url');
+        if (!$this->data['url']) {
+            $this->data['url'] = $this->getMeta('og:url')
+                ? $this->getMeta('og:url')->get('og:url')
+                : null;
         }
     }
     /**
@@ -180,20 +185,20 @@ abstract class AbstractSocialsharer
      * @param string $title
      * @return $this
      */
-    public function title(string $title){
-        $this->data['title'] = $title ;
-        return $this ;
+    public function title($title=null)
+    {
+        $this->data['title'] = $title;
+        return $this;
     }
-     /**
+    /**
      * Set the description specifically for this social sharer
      *
      * @param string $description
      * @return $this
      */
-    public function description($description=null){
-        if ($description) {
-            $this->data['text'] = $description ;
-        }
+    public function description($description = null)
+    {
+        $this->data['text'] = $description;
         return $this;
     }
 }

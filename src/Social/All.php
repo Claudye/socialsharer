@@ -8,7 +8,7 @@ class All extends AbstractSocialsharer{
     public function share()
     {
         $this->addAttribute('href', $this->url);
-        $this->setData();
+       
 
         $this->addAttribute('data-clsharer-url', $this->data['url']);
         $this->addAttribute('data-clsharer-text', $this->data['text']);
