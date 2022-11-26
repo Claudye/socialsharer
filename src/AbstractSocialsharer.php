@@ -190,8 +190,10 @@ abstract class AbstractSocialsharer
      * @param string $description
      * @return $this
      */
-    public function description(string $description){
-        $this->data['text'] = $description ;
+    public function description($description=null){
+        if ($description) {
+            $this->data['text'] = $description ;
+        }
         return $this;
     }
 }
