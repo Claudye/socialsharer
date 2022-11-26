@@ -129,6 +129,7 @@ abstract class AbstractSocialsharer
     public function url(string $url)
     {
         $this->url = $url ;
+        $this->data['url'] = $url ;
         return $this;
     }
 
@@ -172,5 +173,25 @@ abstract class AbstractSocialsharer
     public function __toString()
     {
         return $this->display();
+    }
+    /**
+     * Set the title specifically for this social sharer
+     *
+     * @param string $title
+     * @return $this
+     */
+    public function title(string $title){
+        $this->data['title'] = $title ;
+        return $this ;
+    }
+     /**
+     * Set the description specifically for this social sharer
+     *
+     * @param string $description
+     * @return $this
+     */
+    public function description(string $description){
+        $this->data['text'] = $description ;
+        return $this;
     }
 }
