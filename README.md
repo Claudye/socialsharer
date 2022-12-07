@@ -5,6 +5,13 @@
 
 PHP package to share links on social networks in a simple and fast way.
 
+### Features
+
+- Share on all social networks (sms, copy-paste, gmail etc.)
+- Share on specially on some networks like whatsapp, facebook
+- Support JavaScript Sharing API
+- Ability to style the buttons as desired.
+
 ### Installation
 - First you need to have [composer](https://getcomposer.org/download/) installed
 - Go to the root of your project
