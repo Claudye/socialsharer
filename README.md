@@ -8,7 +8,7 @@ PHP package to share links on social networks in a simple and fast way.
 ### Installation
 - First you need to have [composer](https://getcomposer.org/download/) installed
 - Go to the root of your project
-- Open your terminal and type `composer require claudye/socialsharer` to install the sharer
+- Open your terminal and type `composer require claudye/socialsharer:dev-master` to install the sharer
 If no error appears, it means you have successfully installed the **Socialsharer**
 
 ### Use
@@ -18,14 +18,11 @@ Include composer class autoload file where you want to use socialsharer or anywh
 
 Ex: (To be adapted according to your case)
     require __DIR__.'/vendor/autoload.php';
-Import Socialsharer as:
-
-    use Claudye\Socialsharer\Sharer;
-
-Now you're ready to use the Socialsharer
 
 #### Create meta tag
+Start using Socialsharer 
 
+    use Claudye\Socialsharer\Sharer;
     $metabuilder = Sharer::url($url); // $url the url you want share
 
 
@@ -150,3 +147,6 @@ For social networks and robots to display the title, description and image of yo
     $all->addAttribute('class','btn btn-primary');
     
     echo $all ;
+### Note
+    Attention, for the share button on all channels to work, you must at least add the description via the
+ `Sharer::description($description)`, or via `$all->description($description)` or via the html description tag.

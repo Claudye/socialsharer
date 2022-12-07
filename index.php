@@ -17,25 +17,25 @@ $metabuilder->image($image); // // Create <meta name="og:image" content="the-ima
 
 $metabuilder->meta('og:type', "Website"); // Create <meta name="og:type" content="Website">
 
-//Crée les metas balises et les renvoyer pour l'affichage dans l'en-tête du site 
-//(optionnel) mais très recommandé si les balises tag n'était pas partagées
+//Create meta tags and return them for display in the site header
+//(optional) but highly recommended if tag tags were not shared
 $headerMeta = Sharer::createMeta();
 
 //Importe nos scripts
 $sharerScripts = Sharer::scripts();
 
-# Créer un button partager pour les canaux de partage sms, facebook etc de façon native
+# Create a share button for sms, facebook etc sharing channels natively
 $all = Sharer::all('<i fa fa-share></i> Share');
 
-$all->addAttribute('class','btn btn-primary'); //Ajouter des classes pour customiser le button via css ou js
+$all->addAttribute('class','btn btn-primary'); //Add classes to customize the button via css or js
 
-// Crée le button de partage pour whatsapp
+// Create the share button for whatsapp
 $whatsapp = Sharer::whatsapp('Whatsapp');
 $whatsapp->addAttribute('class','btn whatsapp-btn');
 
 
 $facebook = Sharer::facebook();
-$facebook->addContent('Partager sur facebook');
+$facebook->addContent('Share onfacebook');
 $facebook->addAttribute('class','btn btn-primary');
 ?>
 
