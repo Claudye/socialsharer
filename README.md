@@ -150,3 +150,4 @@ For social networks and robots to display the title, description and image of yo
 ### Note
     Attention, for the share button on all channels to work, you must at least add the description via the
  `Sharer::description($description)`, or via `$all->description($description)` or via the html description tag.
+    You can also check your browser console to see if there is an error
