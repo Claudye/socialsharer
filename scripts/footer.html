@@ -31,10 +31,18 @@
     }
 
     function getSharerData(shareButton){
-        let url = shareButton.dataset.clsharerUrl ?? window.location.href
-        let text = shareButton.dataset.clsharerText ?? getSocialSharerMeta('description')
-        let title = shareButton.dataset.clsharerTitle ?? getSocialSharerMeta('title')
-        if (!text) throw new Error() ;
+        let url = shareButton.dataset.clsharerUrl
+        if (!url) url  = window.location.href
+
+        let title = shareButton.dataset.clsharerTitle
+        if (!title) title =  getSocialSharerMeta('title')
+
+        let text = shareButton.dataset.clsharerText 
+        if (!text) text = getSocialSharerMeta('description') ?? title
+
+        if (!text) {
+            alert("The sharer description text can't be null")
+        }
         return {
             text:text,
             url:url,
@@ -43,15 +51,21 @@
     }
 
     function getSocialSharerMeta(name){
-        let ogName = `meta[name=og:${name}]`
-        let natifName =  `meta[name=${name}]`
-        let mDTag = document.querySelector(ogName)
-        if (!mDTag){
-            mDTag = document.querySelector(natifName)
+        const metas = document.querySelectorAll('meta');
+        
+        for (let i=0; i<metas.length;i++){
+            const meta = metas[i]
+            let mDTag ;
+            if ((meta.name == `og:${name}`) || (meta.name == name)) mDTag = meta
+
+            if (!mDTag && name=='title'){
+                mDTag = document.querySelector(name)
+                return mDTag.textContent
+            }
+            if(!mDTag)  return null
+            return mDTag.content
         }
-        if (name=='title') mDTag = document.querySelector(name)
-        if(!mDTag)  return ''
-        return mDTag.content
+        
     }
 
 </script>
